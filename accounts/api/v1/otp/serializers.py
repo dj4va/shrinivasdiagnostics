@@ -41,7 +41,7 @@ class UpdateUOTPSerializer(BaseOTPSerializer):
 	class Meta(BaseOTPSerializer.Meta):
 		fields = ['otp']
 
-	def _force_user_signin(self, request, user):
+	def _force_login(self, request, user):
 		login(request, user)
 	
 	def update(self, instance, validated_data):
@@ -57,6 +57,6 @@ class UpdateUOTPSerializer(BaseOTPSerializer):
 		# signin method
 		if instance.purpose == self.Meta.model.PurposeChoices.SIGNIN:
 			user = self.Meta.model.objects.get_or_create_user_from_issuer(instance.issuer)
-			self._force_user_signin(request, user)
+			self._force_login(request, user)
 
 		return instance
