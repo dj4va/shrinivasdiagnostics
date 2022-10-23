@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.views import LogoutView, LoginView, PasswordChangeView
 from django.urls import reverse_lazy
+from django.views import View
 
 from .models import *
 from .forms import *
@@ -82,3 +83,10 @@ def profile_detail(request, username):
 
 	return render(request, 'accounts/profile.html', context)
 
+
+class LoginView(View):
+	template_name = 'accounts/login.html'
+	context = {}
+
+	def get(self, request, *args, **kwargs):
+		return render(request, self.template_name, self.context)

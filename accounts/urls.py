@@ -15,5 +15,6 @@ app_name = 'accounts'
 
 urlpatterns = [
     path('', login_view_modal, name='login_view_modal'),
+    path('login/', LoginView.as_view(), name='login_view'),
 ]
 
